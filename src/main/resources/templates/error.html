@@ -1,0 +1,10 @@
+
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}" lang="en">
+<main layout:fragment="content">
+    <h1>Error [[${status}]]</h1>
+    <p th:text="${message}">Something went wrong</p>
+</main>
+</html>

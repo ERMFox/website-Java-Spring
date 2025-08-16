@@ -1,0 +1,32 @@
+<footer id="footer" class="bg-rose-500 dark:bg-purple-700 text-white p-6">
+    <section class="flex flex-wrap justify-between text-center md:text-left space-y-8 md:space-y-0">
+        <div class="w-full md:w-2/3">
+            <p class="text-lg font-bold mb-2">
+                Connect with Me
+            </p>
+            <p>
+                Follow me on social media or reach out to collab!
+            </p>
+            <div class="flex flex-col items-center md:items-start space-y-2 mt-2">
+                <a class="text-black dark:text-white hover:underline" th:href="${footer.connect.github_url}">
+                    [[${footer.connect.github}]]
+                </a>
+                <a class="text-black dark:text-white hover:underline" th:href="${footer.connect.twitter_url}">
+                    [[${footer.connect.twitter}]]
+                </a>
+                <a class="text-black dark:text-white hover:underline" th:href="${footer.connect.linkedin_url}">
+                    [[${footer.connect.linkedin}]]
+                </a>
+            </div>
+        </div>
+        <div class="w-full md:w-1/3">
+            <p class="text-lg font-bold mb-2">
+                Let's Work Together!
+            </p>
+            <p>
+                Contact me directly
+            </p>
+            <a class="text-black dark:text-white block mt-2 text-lg hover:underline" th:href="${footer.connect.mail}"> Get in Touch </a>
+        </div>
+    </section>
+</footer>

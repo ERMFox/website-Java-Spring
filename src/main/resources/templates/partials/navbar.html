@@ -1,0 +1,18 @@
+
+<nav th:fragment="navbar"
+     class="bg-rose-500 dark:bg-purple-700 text-white p-4">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+        <h1 class="text-2xl font-bold" th:text="${navbarTitle}">Portfolio</h1>
+
+        <button id="menu-button" class="block md:hidden" type="button" aria-label="Open menu">
+            <img class="w-6 h-6" th:src="@{/images/menu.svg}" alt="Menu">
+        </button>
+
+        <ul class="hidden md:flex space-x-6 items-center">
+            <!-- add links here, e.g.: -->
+            <li><a th:href="@{/}" class="hover:underline">Home</a></li>
+            <li><a th:href="@{/about}" class="hover:underline">About</a></li>
+            <li><a th:href="@{/projects}" class="hover:underline">Projects</a></li>
+        </ul>
+    </div>
+</nav>
