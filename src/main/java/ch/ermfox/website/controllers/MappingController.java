@@ -20,4 +20,10 @@ public class MappingController {
         return "about";
     }
 
+    @GetMapping("/projects")
+    String projects(Model model) {
+        model.addAttribute("title", "Projects");
+        return "projects";
+    }
+
 }

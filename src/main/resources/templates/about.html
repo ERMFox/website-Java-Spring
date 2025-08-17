@@ -1,9 +1,77 @@
-<!doctype html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}" lang="en">
-<main layout:fragment="content">
-    <h1 th:text="${title}">About</h1>
-    <p>This is the about page content.</p>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="ERMFox's Portfolio - Explore game design, worldbuilding, coding, and art.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Sophie's Portfolio</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-sans">
+
+<div th:replace="partials/header"></div>
+
+
+<div th:replace="partials/navbar :: navbar"></div>
+
+<main class="flex-grow p-8 max-w-5xl mx-auto">
+    <section class="text-center mb-12">
+        <h1 class="text-5xl font-bold text-rose-600 mb-4">About Me</h1>
+        <p class="text-lg text-gray-700 dark:text-gray-200">
+            Hi, I’m ERMFox, a passionate game designer, worldbuilder, and backend developer.
+            I love creating immersive experiences through storytelling, art, and interactive gameplay.
+        </p>
+    </section>
+
+    <!-- Background and Journey -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-semibold mb-4">My Journey</h2>
+        <p>
+            My journey started with a fascination for the stories and worlds within my favorite games. Over time, that passion
+            turned into worldbuilding, writing, and eventually game development. I’ve completed my apprenticeship in software development and am now attending BM2 (Berufsmaturität) with a focus on art & design.
+            Along the way, I’ve explored backend development, storytelling, art, and game systems to build a foundation
+            for the kind of immersive, meaningful games I want to create.
+        </p>
+    </section>
+
+
+    <!-- Skills and Expertise -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-semibold mb-4">Skills and Expertise</h2>
+        <ul class="list-disc list-inside space-y-2">
+            <li><strong>Backend Development:</strong> Proficient with Node.js and Express, currently exploring Spring Boot for Java-based services.</li>
+            <li><strong>Game Design Fundamentals:</strong> Actively developing a tabletop strategy game, experimenting with balance, scripting, and unit design.</li>
+            <li><strong>Worldbuilding and Storytelling:</strong> Creating expansive sci-fi and fantasy worlds with deep lore, factions, and narrative systems.</li>
+            <li><strong>Art and Concept Design:</strong> Passionate about illustrating vehicles, environments, and tech concepts that support worldbuilding.</li>
+        </ul>
+    </section>
+
+
+    <!-- Values and Motivation -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-semibold mb-4">What Drives Me</h2>
+        <p>
+            My goal as a creator is to bring joy, hope, and meaning through interactive experiences. Games were a big
+            part of why I found hope during tough times, and I want to give back by creating worlds where players
+            can find their own solace and excitement.
+        </p>
+    </section>
+
+    <!-- Goals and Aspirations -->
+    <section class="mb-12">
+        <h2 class="text-3xl font-semibold mb-4">My Goals</h2>
+        <p>
+            I’m currently building my portfolio. My next major goal is to study game design at ZHdK,
+            where I can grow as both a developer and a creative thinker. Long-term, I aspire to work in the game industry as a narrative designer or concept artist,
+            combining storytelling, technical skills, and worldbuilding into projects that resonate with players.
+        </p>
+    </section>
 </main>
+
+<div th:replace="partials/footer :: footer"></div>
+
+<script th:src="@{/js/githubInteractions.js}" defer></script>
+
+</body>
 </html>
+

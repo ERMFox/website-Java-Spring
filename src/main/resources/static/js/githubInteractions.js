@@ -1,9 +1,34 @@
+// github.js
 (() => {
     async function fetchPinnedRepos() {
         const resp = await fetch('/api/github/pinned', { headers: { 'Accept': 'application/json' } });
         if (!resp.ok) return [];
         const json = await resp.json();
         return json?.data?.user?.pinnedItems?.nodes ?? [];
+    }
+
+    async function fetchAllRepos(pageSize = 100) {
+        const all = [];
+        let cursor = null;
+        let hasNext = true;
+
+        while (hasNext) {
+            const url = new URL('/api/github/repos', window.location.origin);
+            url.searchParams.set('pageSize', String(pageSize));
+            if (cursor) url.searchParams.set('cursor', cursor);
+
+            const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+            if (!resp.ok) break;
+
+            const json = await resp.json();
+            const repos = json?.data?.user?.repositories;
+            const nodes = repos?.nodes ?? [];
+            all.push(...nodes);
+
+            hasNext = Boolean(repos?.pageInfo?.hasNextPage);
+            cursor = repos?.pageInfo?.endCursor ?? null;
+        }
+        return all;
     }
 
     function createLanguageBars(languages) {
@@ -43,45 +68,58 @@
         return wrap;
     }
 
+    function repoCard(repo) {
+        const card = document.createElement("div");
+        card.className = "bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md flex flex-col";
+
+        const title = document.createElement("h3");
+        title.className = "text-xl font-bold mb-2";
+        title.textContent = repo.name;
+
+        const desc = document.createElement("p");
+        desc.className = "text-gray-600 dark:text-gray-400 mb-4";
+        desc.textContent = repo.description || "No description available.";
+
+        const link = document.createElement("a");
+        link.className = "mt-auto text-rose-600 dark:text-purple-600 font-semibold hover:underline";
+        link.href = repo.url;
+        link.target = "_blank";
+        link.textContent = "View Repository →";
+
+        const edges = repo.languages?.edges ?? [];
+        if (edges.length) {
+            card.appendChild(createLanguageBalls(edges));
+            card.appendChild(createLanguageBars(edges));
+        }
+
+        card.append(title, desc, link);
+        return card;
+    }
+
     async function renderPinnedRepos() {
         const container = document.getElementById("pinned-repos");
         if (!container) return;
         container.innerHTML = "";
         const repos = await fetchPinnedRepos();
-
-        repos.forEach((repo) => {
-            const card = document.createElement("div");
-            card.className = "bg-white dark:bg-slate-900 p-6 rounded-lg shadow-md";
-
-            const title = document.createElement("h3");
-            title.className = "text-xl font-bold mb-2";
-            title.textContent = repo.name;
-
-            const desc = document.createElement("p");
-            desc.className = "text-gray-600 dark:text-gray-400 mb-4";
-            desc.textContent = repo.description || "No description available.";
-
-            const link = document.createElement("a");
-            link.className = "text-rose-600 dark:text-purple-600 font-semibold hover:underline";
-            link.href = repo.url;
-            link.target = "_blank";
-            link.textContent = "View Repository →";
-
-            const edges = repo.languages?.edges ?? [];
-            if (edges.length) {
-                card.appendChild(createLanguageBalls(edges));
-                card.appendChild(createLanguageBars(edges));
-            }
-
-            card.append(title, desc, link);
-            container.appendChild(card);
-        });
+        repos.forEach((repo) => container.appendChild(repoCard(repo)));
     }
 
-    // run after DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', renderPinnedRepos);
-    } else {
+    async function renderAllRepos() {
+        const container = document.getElementById("all-repos");
+        if (!container) return;
+        container.innerHTML = "";
+        const repos = await fetchAllRepos();
+        repos.forEach((repo) => container.appendChild(repoCard(repo)));
+    }
+
+    function init() {
         renderPinnedRepos();
+        renderAllRepos();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
     }
 })();

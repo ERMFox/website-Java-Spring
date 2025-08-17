@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="ERMFox's Portfolio - Explore game design, worldbuilding, coding, and art.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Sophie's Portfolio</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-sans">
+
+<div th:replace="partials/header"></div>
+
+
+<div th:replace="partials/navbar :: navbar"></div>
+
+<main class="flex-grow p-8 max-w-5xl mx-auto">
+    <section class="text-center mb-12">
+        <h1 class="text-3xl font-bold mb-4">Welcome to Sophie's Portfolio</h1>
+        <p class="text-lg">Feel free to discover my Portfolio at your own pace.</p>
+        <q>The community makes the game</q>
+    </section>
+
+    <section>
+        <h2 class="text-2xl font-bold mb-4">All repositories</h2>
+        <div id="all-repos" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"></div>
+    </section>
+
+</main>
+
+<div th:replace="partials/footer :: footer"></div>
+
+<script th:src="@{/js/githubInteractions.js}" defer></script>
+
+</body>
+</html>

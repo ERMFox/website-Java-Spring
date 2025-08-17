@@ -10,10 +10,25 @@ import java.util.Map;
 @RequestMapping("/api/github")
 public class GithubController {
     private final GithubService service;
-    public GithubController(GithubService service) { this.service = service; }
 
+    public GithubController(GithubService service) {
+        this.service = service;
+    }
+
+    /** Get pinned repositories (max 6) */
     @GetMapping("/pinned")
-    public Mono<ResponseEntity<Map<String,Object>>> pinned() {
-        return service.getPinned().map(ResponseEntity::ok);
+    public Mono<ResponseEntity<Map<String, Object>>> pinned() {
+        return service.runPinned()
+                .map(ResponseEntity::ok);
+    }
+
+    /** Get all public repositories, paginated (default 100 per page) */
+    @GetMapping("/repos")
+    public Mono<ResponseEntity<Map<String, Object>>> repos(
+            @RequestParam(defaultValue = "100") int pageSize,
+            @RequestParam(required = false) String cursor
+    ) {
+        return service.runAllRepos(pageSize, cursor)
+                .map(ResponseEntity::ok);
     }
 }
