@@ -2,17 +2,21 @@
 FROM eclipse-temurin:24-jdk AS build
 WORKDIR /app
 
-# Copy Gradle files first (for caching)
-COPY build.gradle settings.gradle gradlew ./
+# Copy Gradle wrapper and build scripts first (for caching)
+COPY gradlew ./
 COPY gradle ./gradle
+COPY build.gradle settings.gradle ./
 
-# Pre-download dependencies
-RUN ./gradlew dependencies --no-daemon || return 0
+# Make gradlew executable (critical!)
+RUN chmod +x gradlew
 
-# Copy source code
+# Pre-download dependencies (ignore failure if no tests etc.)
+RUN ./gradlew dependencies --no-daemon || true
+
+# Copy the source code
 COPY src ./src
 
-# Build the jar
+# Build the jar (print full logs if it fails)
 RUN ./gradlew bootJar --no-daemon --stacktrace --info
 
 # ===== Runtime Stage =====
