@@ -13,7 +13,7 @@ RUN ./gradlew dependencies --no-daemon || return 0
 COPY src ./src
 
 # Build the jar
-RUN ./gradlew bootJar --no-daemon
+RUN ./gradlew bootJar --no-daemon --stacktrace --info
 
 # ===== Runtime Stage =====
 FROM eclipse-temurin:24-jre
