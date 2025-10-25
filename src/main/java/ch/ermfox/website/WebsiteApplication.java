@@ -1,5 +1,6 @@
 package ch.ermfox.website;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,10 +9,11 @@ public class WebsiteApplication {
 
     public static void main(String[] args) {
 
-        io.github.cdimascio.dotenv.Dotenv dotenv = io.github.cdimascio.dotenv.Dotenv.configure()
-                .ignoreIfMissing()
-                .load();
-        System.setProperty("GITHUB_TOKEN", dotenv.get("GITHUB_TOKEN", ""));
+        Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
+        System.setProperty("github.token", dotenv.get("GITHUB_TOKEN", ""));
+        System.setProperty("github.username", dotenv.get("GITHUB_USERNAME", "ermfox"));
+        SpringApplication.run(WebsiteApplication.class, args);
+
         SpringApplication.run(WebsiteApplication.class, args);
     }
 
