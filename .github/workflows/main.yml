@@ -31,7 +31,8 @@ jobs:
         id: lower
         run: echo "owner=$(echo '${{ github.repository_owner }}' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_OUTPUT
 
-      - name: Build and Push Docker Image
+      # 🏗️ Build multi-arch image (amd64 + arm64)
+      - name: Build and Push Docker Image (multi-arch)
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -40,3 +41,12 @@ jobs:
           tags: |
             ghcr.io/${{ steps.lower.outputs.owner }}/website:latest
             ghcr.io/${{ steps.lower.outputs.owner }}/website:${{ github.run_number }}
+
+      # 🧱 Optional: Tag ARM-only build as :armBuild
+      - name: Build and Push ARM-only tag
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          platforms: linux/arm64
+          tags: ghcr.io/${{ steps.lower.outputs.owner }}/website:armBuild
