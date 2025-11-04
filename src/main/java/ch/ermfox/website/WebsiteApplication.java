@@ -13,8 +13,6 @@ public class WebsiteApplication {
         System.setProperty("github.token", dotenv.get("GITHUB_TOKEN", ""));
         System.setProperty("github.username", dotenv.get("GITHUB_USERNAME", "ermfox"));
         SpringApplication.run(WebsiteApplication.class, args);
-
-        SpringApplication.run(WebsiteApplication.class, args);
     }
 
 }
