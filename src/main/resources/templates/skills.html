@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Skills & closed-source portfolio projects by Sophie (ERMFox)">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Skills</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-sans">
+<div th:replace="partials/header"></div>
+<div th:replace="partials/navbar :: navbar"></div>
+
+<main class="flex-grow p-8 max-w-5xl mx-auto">
+    <section class="text-center mb-12">
+        <h1 class="text-3xl font-bold mb-4">Skills & Projects</h1>
+        <p class="text-lg">Closed-source or private works I’ve contributed to.</p>
+    </section>
+
+    <section>
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div th:each="project : ${projects}"
+                 class="p-4 bg-white dark:bg-slate-700 rounded-2xl shadow hover:shadow-lg transition">
+                <img th:src="${project.thumbnailUrl}" alt="project thumbnail"
+                     class="rounded-xl mb-3">
+                <h2 th:text="${project.title}" class="text-xl font-semibold mb-2"></h2>
+                <p th:text="${project.summary}" class="mb-3"></p>
+                <small th:text="${project.techTags}" class="block text-sm text-slate-400 mb-2"></small>
+                <a th:href="@{'/skills/' + ${project.slug}}"
+                   class="text-indigo-600 dark:text-indigo-400 hover:underline">Read more →</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:replace="partials/footer :: footer"></div>
+</body>
+</html>

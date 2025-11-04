@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" th:content="${project.summary}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${project.title}">Project Details</title>
+    <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-sans">
+<div th:replace="partials/header"></div>
+<div th:replace="partials/navbar :: navbar"></div>
+
+<main class="flex-grow p-8 max-w-4xl mx-auto">
+
+    <h1 th:text="${project.title}"></h1>
+
+    <div th:utext="${content}" class="prose dark:prose-invert"></div>
+
+
+    <div class="mt-8">
+        <a href="/skills"
+           class="text-indigo-600 dark:text-indigo-400 hover:underline">← Back to all skills</a>
+    </div>
+</main>
+
+<div th:replace="partials/footer :: footer"></div>
+</body>
+</html>
