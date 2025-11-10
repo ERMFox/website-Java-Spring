@@ -26,7 +26,7 @@ public class Project {
     private ProjectDetails details;
 
 
-    protected Project() {}
+    public Project() {}
 
     // Getters/setters
 

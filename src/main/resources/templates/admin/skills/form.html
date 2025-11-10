@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<section layout:fragment="content">
+
+  <h1 class="text-2xl font-bold mb-6" th:text="${title}">Edit Project</h1>
+
+  <form th:action="@{${action}}"
+        th:object="${project}"
+        method="post"
+        class="space-y-6">
+
+    <div>
+      <label class="font-semibold">Slug</label>
+      <input th:field="*{slug}"
+             class="w-full px-3 py-2 rounded bg-slate-700 text-white"/>
+    </div>
+
+    <div>
+      <label class="font-semibold">Title</label>
+      <input th:field="*{title}"
+             class="w-full px-3 py-2 rounded bg-slate-700 text-white"/>
+    </div>
+
+    <div>
+      <label class="font-semibold">Summary</label>
+      <textarea th:field="*{summary}"
+                rows="3"
+                class="w-full px-3 py-2 rounded bg-slate-700 text-white"></textarea>
+    </div>
+
+    <div>
+      <label class="font-semibold">Tech Tags</label>
+      <input th:field="*{techTags}"
+             class="w-full px-3 py-2 rounded bg-slate-700 text-white"/>
+    </div>
+
+    <div>
+      <label class="font-semibold">Thumbnail URL</label>
+      <input th:field="*{thumbnailUrl}"
+             class="w-full px-3 py-2 rounded bg-slate-700 text-white"/>
+    </div>
+
+    <div>
+      <label class="font-semibold">Markdown</label>
+      <textarea name="markdown"
+                rows="20"
+                class="w-full px-3 py-2 rounded bg-slate-700 text-white"
+                th:text="${markdown}"></textarea>
+    </div>
+
+    <button type="submit"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">
+      Save
+    </button>
+  </form>
+
+  <p class="mt-4">
+    <a th:href="@{/admin/skills}"
+       class="text-rose-500 hover:underline">
+      Back
+    </a>
+  </p>
+
+</section>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title th:text="${title}">Admin – Sophie</title>
+  <link rel="stylesheet" th:href="@{/css/output.css}">
+</head>
+
+<body class="flex flex-col min-h-screen bg-gray-100 dark:bg-slate-800 text-gray-800 dark:text-gray-200 font-sans">
+
+<div th:replace="partials/header"></div>
+<div th:replace="partials/navbar :: navbar"></div>
+
+<!-- ✅ must have flex-grow -->
+<main class="flex-grow p-8 max-w-6xl mx-auto">
+  <section layout:fragment="content"></section>
+</main>
+
+<div th:replace="partials/footer :: footer"></div>
+
+</body>
+</html>

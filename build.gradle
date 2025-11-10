@@ -32,16 +32,23 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.vladsch.flexmark:flexmark-all:0.64.8'
+    implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity6"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
-    // --- Database drivers ---
-    runtimeOnly 'com.h2database:h2'                       // local development
-    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'    // GitHub Actions / production
+/* ✅ Optional (security test helpers)
+testImplementation 'org.springframework.security:spring-security-test'
+*/
 
-    //developmentOnly 'org.springframework.boot:spring-boot-devtools'
+// Database drivers
+    runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+//developmentOnly 'org.springframework.boot:spring-boot-devtools'
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
 }
 
 tasks.named('test') {

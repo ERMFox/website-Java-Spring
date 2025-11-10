@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<section layout:fragment="content" class="text-center">
+
+    <h1 class="text-3xl font-bold mb-6">Admin Dashboard</h1>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        <a th:href="@{/admin/skills}"
+           class="p-6 bg-rose-500 hover:bg-rose-600
+                  dark:bg-purple-700 dark:hover:bg-purple-800
+                  text-white rounded-lg text-xl font-semibold text-center">
+            Manage Skills / Projects
+        </a>
+    </div>
+
+</section>
+
+</html>

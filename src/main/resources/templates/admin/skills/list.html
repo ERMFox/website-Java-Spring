@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<section layout:fragment="content">
+
+    <h1 class="text-2xl font-bold mb-6">Manage Projects</h1>
+
+    <a th:href="@{/admin/skills/new}"
+       class="inline-block mb-6 bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded">
+        + New Project
+    </a>
+
+    <table class="w-full text-left border-collapse">
+        <tr class="border-b">
+            <th class="p-3">Title</th>
+            <th class="p-3">Slug</th>
+            <th class="p-3">Actions</th>
+        </tr>
+
+        <tr th:each="p : ${projects}" class="border-b">
+            <td class="p-3" th:text="${p.title}"></td>
+            <td class="p-3" th:text="${p.slug}"></td>
+
+            <td class="p-3 space-x-2">
+
+                <a th:href="@{|/admin/skills/${p.id}|}"
+                   class="text-blue-500 hover:underline">Edit</a>
+
+                <form th:action="@{|/admin/skills/${p.id}/delete|}"
+                      method="post" style="display:inline">
+                    <button class="text-red-600 hover:underline"
+                            type="submit">Delete</button>
+                </form>
+
+            </td>
+        </tr>
+    </table>
+
+</section>
+
+</html>

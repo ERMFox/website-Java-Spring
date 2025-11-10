@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/layout}">
+
+<section layout:fragment="content" class="max-w-sm mx-auto">
+  <h1 class="text-2xl font-bold mb-6 text-center">Admin Login</h1>
+
+  <form th:action="@{/admin/login}" method="post" class="space-y-6">
+    <input type="text" name="username" placeholder="Username" class="w-full px-3 py-2 rounded bg-slate-700 text-white"/>
+    <input type="password" name="password" placeholder="Password" class="w-full px-3 py-2 rounded bg-slate-700 text-white"/>
+    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded">Log in</button>
+  </form>
+</section>
+
+</html>

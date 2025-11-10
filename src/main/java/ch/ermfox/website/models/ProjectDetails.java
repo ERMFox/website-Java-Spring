@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 @Table(name = "project_details")
 public class ProjectDetails {
 
-    protected ProjectDetails() {}
+    public ProjectDetails() {}
 
 
     @Id
