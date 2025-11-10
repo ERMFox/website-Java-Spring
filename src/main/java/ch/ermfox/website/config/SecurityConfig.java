@@ -15,6 +15,7 @@ import org.springframework.security.web.access.intercept.RequestAuthorizationCon
 import org.springframework.security.web.util.matcher.IpAddressMatcher;
 import org.springframework.security.core.Authentication;
 
+import jakarta.servlet.http.HttpServletRequest;   // ✅ needed
 import java.util.function.Supplier;
 
 @Configuration
@@ -29,6 +30,16 @@ public class SecurityConfig {
     private static final IpAddressMatcher LOOPBACK = new IpAddressMatcher("127.0.0.1/32");
     private static final IpAddressMatcher LOOPBACK_V6 = new IpAddressMatcher("::1/128");
 
+    /** ✅ Resolve the true client IP, even behind Traefik */
+    private String resolveClientIp(HttpServletRequest request) {
+        String xf = request.getHeader("X-Forwarded-For");
+        if (xf != null && !xf.isBlank()) {
+            // XFF can contain multiple entries — take first
+            return xf.split(",")[0].trim();
+        }
+        return request.getRemoteAddr();
+    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
@@ -37,7 +48,9 @@ public class SecurityConfig {
                         .requestMatchers("/admin/**").access(
                                 (Supplier<Authentication> authentication, RequestAuthorizationContext ctx) -> {
 
-                                    String ip = ctx.getRequest().getRemoteAddr();
+                                    // ✅ Use forwarded client IP, NOT Traefik’s docker IP
+                                    String ip = resolveClientIp(ctx.getRequest());
+
                                     boolean inLan =
                                             LAN_10.matches(ip) ||
                                                     LAN_172.matches(ip) ||
@@ -49,8 +62,7 @@ public class SecurityConfig {
                                         return new AuthorizationDecision(false);
                                     }
 
-                                    var authObj = (Authentication) authentication.get();
-
+                                    var authObj = authentication.get();
                                     boolean hasAdmin = authObj.getAuthorities().stream()
                                             .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
 
