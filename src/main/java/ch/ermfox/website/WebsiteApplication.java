@@ -12,7 +12,6 @@ public class WebsiteApplication {
         Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
         System.setProperty("github.token", dotenv.get("GITHUB_TOKEN", ""));
         System.setProperty("github.username", dotenv.get("GITHUB_USERNAME", "ermfox"));
-        System.setProperty("admin.password", dotenv.get("ADMIN_PASSWORD", ""));
         SpringApplication.run(WebsiteApplication.class, args);
     }
 
