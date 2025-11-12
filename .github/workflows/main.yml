@@ -42,11 +42,11 @@ jobs:
             ghcr.io/${{ steps.lower.outputs.owner }}/website:latest
             ghcr.io/${{ steps.lower.outputs.owner }}/website:${{ github.run_number }}
 
-      # 🧱 Optional: Tag ARM-only build as :armBuild
-      - name: Build and Push ARM-only tag
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          platforms: linux/arm64
-          tags: ghcr.io/${{ steps.lower.outputs.owner }}/website:armBuild
+      
+      - name: 🔁 Tag previous image
+        if: ${{ github.run_number > 1 }}
+        run: |
+          PREV=$(( ${{ github.run_number }} - 1 ))
+          docker buildx imagetools create \
+            -t ghcr.io/${{ steps.lower.outputs.owner }}/website:previous \
+            ghcr.io/${{ steps.lower.outputs.owner }}/website:${PREV}
