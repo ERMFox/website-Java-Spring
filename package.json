@@ -1,0 +1,25 @@
+{
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "@tailwindcss/typography": "^0.5.19",
+    "tailwindcss": "^4.1.18"
+  },
+  "name": "website-java-spring",
+  "description": "A revised version of my personal portfolio website, rebuilt with Spring Boot for the backend. Currently serves Thymeleaf templates styled with Tailwind CSS. Features a dynamic GitHub integration that fetches and displays pinned repositories securely via the GitHub GraphQL API.",
+  "version": "1.0.0",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ERMFox/website-Java-Spring.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ERMFox/website-Java-Spring/issues"
+  },
+  "homepage": "https://github.com/ERMFox/website-Java-Spring#readme"
+}

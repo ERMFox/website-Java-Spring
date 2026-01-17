@@ -23,3 +23,11 @@
 hs_err_pid*
 replay_pid*
 .env
+
+.gradle
+
+.idea
+
+build
+
+node_modules

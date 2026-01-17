@@ -34,7 +34,7 @@ dependencies {
     implementation 'com.vladsch.flexmark:flexmark-all:0.64.8'
     implementation "org.thymeleaf.extras:thymeleaf-extras-springsecurity6"
     implementation 'org.springframework.boot:spring-boot-starter-security'
-
+    developmentOnly("org.springframework.boot:spring-boot-devtools")
 /* ✅ Optional (security test helpers)
 testImplementation 'org.springframework.security:spring-security-test'
 */
